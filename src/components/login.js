@@ -25,7 +25,7 @@ const Login = (props)=>{
                 </Form>
             </Section>
         </Container>
-    )
+    );
 };
 
 const Container =styled.div`
