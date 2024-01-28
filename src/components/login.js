@@ -1,39 +1,39 @@
 import styled from "styled-components";
+import { connect } from "react-redux";
 
-const Login = (props)=>{
-    return (
-        <Container>
-            <Nav>
-                <a href="/">
-                    <img src="/images/login-logo.svg" alt="" />
-                </a>
-                <div>
-                    <Join>Join now</Join>
-                    <SignIn>Sign In</SignIn>
-                </div>
-            </Nav>
-            <Section>
-                <Hero>
-                    <h1>Welcome to your professional community</h1>
-                    <img src="/images/login-hero.svg" alt="" />
-                </Hero>
-                <Form>
-                    <Google>
-                        <img src="/images/google.svg" alt="" />
-                        Sign in with Google
-                    </Google>
-                </Form>
-            </Section>
-        </Container>
-    );
+const Login = (props) => {
+  return (
+    <Container>
+      <Nav>
+        <a href="/">
+          <img src="/images/login-logo.svg" alt="" />
+        </a>
+        <div>
+          <Join>Join now</Join>
+          <SignIn>Sign In</SignIn>
+        </div>
+      </Nav>
+      <Section>
+        <Hero>
+          <h1>Welcome to your professional community</h1>
+          <img src="/images/login-hero.svg" alt="" />
+        </Hero>
+        <Form>
+          <Google>
+            <img src="/images/google.svg" alt="" />
+            Sign in with Google
+          </Google>
+        </Form>
+      </Section>
+    </Container>
+  );
 };
 
-const Container =styled.div`
-    padding:0px;
-    
+const Container = styled.div`
+  padding: 0px;
 `;
 const Nav = styled.nav`
-    max-width: 1300px;
+  max-width: 1300px;
   margin: auto;
   padding: 12px 0 16px;
   display: flex;
@@ -50,8 +50,8 @@ const Nav = styled.nav`
     }
   }
 `;
-const Join=styled.a`
-    font-size: 16px;
+const Join = styled.a`
+  font-size: 16px;
   padding: 10px 12px;
   text-decoration: none;
   border-radius: 4px;
@@ -64,7 +64,7 @@ const Join=styled.a`
   }
 `;
 const SignIn = styled.a`
-    box-shadow: inset 0 0 0 1px #0a66c2;
+  box-shadow: inset 0 0 0 1px #0a66c2;
   color: #0a66c2;
   border-radius: 24px;
   transition-duration: 167ms;
@@ -81,7 +81,7 @@ const SignIn = styled.a`
   }
 `;
 const Section = styled.section`
-    display: flex;
+  display: flex;
   align-content: start;
   min-height: 700px;
   padding-bottom: 138px;
@@ -100,7 +100,7 @@ const Section = styled.section`
   }
 `;
 const Hero = styled.div`
-    width: 100%;
+  width: 100%;
   h1 {
     padding-bottom: 0;
     width: 55%;
@@ -132,14 +132,14 @@ const Hero = styled.div`
   }
 `;
 const Form = styled.div`
-    margin-top: 100px;
+  margin-top: 100px;
   width: 408px;
   @media (max-width: 768px) {
     margin-top: 20px;
   }
 `;
-const Google= styled.button`
-    display: flex;
+const Google = styled.button`
+  display: flex;
   justify-content: center;
   background-color: #fff;
   align-items: center;
@@ -159,4 +159,11 @@ const Google= styled.button`
     color: rgba(0, 0, 0, 0.75);
   }
 `;
-export default Login;
+
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
