@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 const Header = (props) => {
   return (
@@ -19,7 +20,7 @@ const Header = (props) => {
         </Search>
         <Nav>
           <NavListWrap>
-            <NavList className="active" >
+            <NavList className="active">
               <a>
                 <img src="/images/nav-home.svg" alt="" />
                 <span>Home</span>
@@ -50,26 +51,34 @@ const Header = (props) => {
             <NavList>
               <a>
                 <img src="/images/nav-notifications.svg" alt="" />
+
                 <span>Notifications</span>
               </a>
             </NavList>
             <User>
-                <a>
-                    <img src="images/user.svg" alt="" />
-                    <span>Me</span>
-                    <img src="images/down-icon.svg" alt="" />
-                </a>
-                <SignOut>
-                    <a>Sign Out</a>
-                </SignOut>
+              <a>
+                {props.user && props.user.photoURL ? (
+                  <img src={props.user.photoURL} alt="" />
+                ) : (
+                  <img src="images/user.svg" alt="" />
+                )}
+                <span>
+                  Me
+                  <img src="images/down-icon.svg" alt="" />
+                </span>
+              </a>
+              <SignOut>
+                <a>Sign Out</a>
+              </SignOut>
             </User>
             <Work>
-                <a>
-                    <img src="images/nav-work.svg" alt="" />
-                    <span>Work
-                        <img src="images/down-icon.svg" alt="" />
-                    </span>
-                </a>
+              <a>
+                <img src="images/nav-work.svg" alt="" />
+                <span>
+                  Work
+                  <img src="images/down-icon.svg" alt="" />
+                </span>
+              </a>
             </Work>
           </NavListWrap>
         </Nav>
@@ -205,42 +214,47 @@ const NavList = styled.li`
   }
 `;
 const SignOut = styled.div`
-    position: absolute;
-    top: 45px;
-    background: white;
-    border-radius: 0 0 5px 5px;
-    width: 100px;
-    height: 40px;
-    font-size: 16px;
-    transition-duration: 167ms;
-    text-align: center;
-    display: none;
+  position: absolute;
+  top: 45px;
+  background: white;
+  border-radius: 0 0 5px 5px;
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
+  transition-duration: 167ms;
+  text-align: center;
+  display: none;
 `;
 const User = styled(NavList)`
-    a > svg {
-        width: 24px;
-        border-radius: 50%;
+  a > svg {
+    width: 24px;
+    border-radius: 50%;
+  }
+  a > img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  }
+  span {
+    display: flex;
+    align-items: center;
+  }
+  &:hover {
+    ${SignOut} {
+      align-items: center;
+      display: flex;
+      justify-content: center;
     }
-    a> img{
-        width:24px;
-        height: 24px;
-        border-radius: 50%;
-    }
-    span{
-        display: flex;
-        align-items: center;
-    }
-    &:hover{
-        ${SignOut}{
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-    }
+  }
 `;
 const Work = styled(User)`
-    border-left: 1px solid rgba(0,0,0,0.08);
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
 `;
 
-
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+const mapDispatchToProps = (dispatch) => ({});
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
