@@ -28,3 +28,16 @@ export function getUserAuth() {
     });
   };
 }
+
+export function signOUtApi() {
+  return (dispatch) => {
+    auth
+      .signOut()
+      .then(() => {
+        dispatch(setUser(null));
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+}
