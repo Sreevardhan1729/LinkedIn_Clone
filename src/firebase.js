@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+import { getStorage, ref } from "firebase/storage";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,9 +22,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
-const db = getDatabase(firebaseApp);
+const db = getFirestore(firebaseApp);
 const auth = getAuth();
-const storage = getFirestore(firebaseApp);
+const storage = getStorage(firebaseApp);
 
 export { auth, provider, storage };
 export default db;

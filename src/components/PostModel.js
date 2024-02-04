@@ -2,12 +2,14 @@ import styled from "styled-components";
 import { useState } from "react";
 import ReactPlayer from "react-player";
 import { connect } from "react-redux";
+import { Timestamp } from "firebase/firestore";
+import { postArticleAPI } from "../actions";
 
 const PostModel = (props) => {
-  const [editorText, seteditorText] = useState("");
+  const [editorText, setEditorText] = useState("");
   const [shareImgae, setShareImage] = useState("");
   const [videoLink, setVideoLink] = useState("");
-  const [assectArea, setassetArea] = useState("");
+  const [assetArea, setassetArea] = useState("");
 
   const handleChnage = (e) => {
     const image = e.target.files[0];
@@ -25,13 +27,31 @@ const PostModel = (props) => {
     setassetArea(area);
   };
 
+  const postArticle = (e) => {
+    e.preventDefault();
+    if (e.target !== e.currentTarget) {
+      return 0;
+    }
+
+    const payload = {
+      image: shareImgae,
+      video: videoLink,
+      user: props.user,
+      description: editorText,
+      timestamp: Timestamp.now(),
+    };
+    props.postArticleAPI(payload);
+    reset(e);
+  };
+
   const reset = (e) => {
-    seteditorText("");
+    setEditorText("");
     setShareImage("");
     setVideoLink("");
     setassetArea("");
     props.handleClick(e);
   };
+
   return (
     <>
       {props.showModel === "open" && (
@@ -46,7 +66,7 @@ const PostModel = (props) => {
             <SharedContent>
               <UserInfo>
                 {props.user.photoURL ? (
-                  <img src={props.user.photoURL} />
+                  <img src={props.user.photoURL} alt="" />
                 ) : (
                   <img src="/images/user.svg" alt="" />
                 )}
@@ -55,11 +75,11 @@ const PostModel = (props) => {
               <Editor>
                 <textarea
                   value={editorText}
-                  onChange={(e) => seteditorText(e.target.value)}
+                  onChange={(e) => setEditorText(e.target.value)}
                   placeholder="What do you want to talk about?"
                   autoFocus={true}
                 />
-                {assectArea === "image" ? (
+                {assetArea === "image" ? (
                   <UploadImage>
                     <input
                       type="file"
@@ -70,14 +90,16 @@ const PostModel = (props) => {
                       onChange={handleChnage}
                     />
                     <p>
-                      <label htmlFor="file">Select an image to share</label>
+                      <label htmlFor="file" style={{ cursor: "pointer" }}>
+                        Select an image to share
+                      </label>
                     </p>
                     {shareImgae && (
-                      <img src={URL.createObjectURL(shareImgae)} />
+                      <img src={URL.createObjectURL(shareImgae)} alt="" />
                     )}
                   </UploadImage>
                 ) : (
-                  assectArea === "media" && (
+                  assetArea === "media" && (
                     <>
                       <input
                         type="text"
@@ -110,7 +132,10 @@ const PostModel = (props) => {
                   Anyone
                 </AssetButton>
               </ShareComment>
-              <PostButton disabled={!editorText ? true : false}>
+              <PostButton
+                disabled={!editorText}
+                onClick={(event) => postArticle(event)}
+              >
                 Post
               </PostButton>
             </ShareCreation>
@@ -260,11 +285,15 @@ const UploadImage = styled.div`
   }
 `;
 
-const mapDispatchToProps = (dispatch) => ({});
 const mapStateToProps = (state) => {
   return {
     user: state.userState.user,
   };
 };
+const mapDispatchToProps = (dispatch) => ({
+  postArticleAPI: (payload) => {
+    dispatch(postArticleAPI(payload));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostModel);
