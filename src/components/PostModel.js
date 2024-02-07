@@ -126,12 +126,6 @@ const PostModel = (props) => {
                   <img src="/images/video-icon.svg" alt="" />
                 </AssetButton>
               </AttachAssets>
-              <ShareComment>
-                <AssetButton>
-                  <img src="/images/comments-icon.svg" alt="" />
-                  Anyone
-                </AssetButton>
-              </ShareComment>
               <PostButton
                 disabled={!editorText}
                 onClick={(event) => postArticle(event)}
@@ -271,10 +265,28 @@ const Editor = styled.div`
     resize: none;
   }
   input {
+    background-color: #bdbdbd;
     width: 100%;
     height: 35px;
     font-size: 16px;
     margin-bottom: 20px;
+  }
+  p > label {
+    background-color: #0a66c2;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 2px 1px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  p > label:hover {
+    background-color: #004182;
   }
 `;
 

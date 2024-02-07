@@ -3,14 +3,27 @@ import { auth, provider } from "../firebase"; // import auth and provider direct
 import db, { storage } from "../firebase"; // import db and storage directly from firebase
 import { ref, uploadBytesResumable } from "firebase/storage"; // import only ref and uploadBytes from firebase/storage
 import { getDownloadURL } from "firebase/storage"; // import getDownloadURL from firebase/storage
-import { collection } from "firebase/firestore"; // import collection from firebase/firestore
+import { collection, orderBy, query } from "firebase/firestore"; // import collection from firebase/firestore
 import { addDoc } from "firebase/firestore";
-import { SET_USER } from "./actionType";
+import { SET_USER, SET_LOADING_STATUS, GET_ARTICLES } from "./actionType";
+import { onSnapshot } from "firebase/firestore";
+import { browserPopupRedirectResolver } from "firebase/auth";
 
 export const setUser = (payload) => ({
   type: SET_USER,
   user: payload,
 });
+
+export const setLoading = (status) => ({
+  type: SET_LOADING_STATUS,
+  status: status,
+});
+
+export const getArticles = (payload) => ({
+  type: GET_ARTICLES,
+  payload: payload,
+});
+
 export const SignInApi = () => {
   return (dispatch) =>
     signInWithPopup(auth, provider) // Use signInWithPopup directly from firebase/auth
@@ -48,7 +61,8 @@ export function signOUtApi() {
 }
 
 export function postArticleAPI(payload) {
-  return async (dispatch) => {
+  return (dispatch) => {
+    dispatch(setLoading(true));
     if (payload.image != "") {
       const file = `images/${payload.image.name}`;
       const file1 = payload.image;
@@ -80,6 +94,7 @@ export function postArticleAPI(payload) {
             comments: 0,
             description: payload.description,
           });
+          dispatch(setLoading(false));
         }
       );
     } else if (payload.video) {
@@ -95,7 +110,19 @@ export function postArticleAPI(payload) {
         comments: 0,
         description: payload.description,
       });
-      console.log("DONE");
+      dispatch(setLoading(false));
     }
+  };
+}
+
+export function getArticlesAPI() {
+  return (dispath) => {
+    let payload;
+    const q = query(collection(db, "articles"), orderBy("actor.date", "desc"));
+    onSnapshot(q, (snapshot) => {
+      payload = snapshot.docs.map((doc) => doc.data());
+      console.log(payload);
+      dispath(getArticles(payload));
+    });
   };
 }
