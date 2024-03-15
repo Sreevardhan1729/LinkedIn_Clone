@@ -1440,7 +1440,7 @@
     "@firebase/component" "0.6.4"
     "@firebase/util" "1.9.3"
     tslib "^2.1.0"
-    undici "5.26.5"
+    undici "5.28.3"
 
 "@firebase/auth-interop-types@0.2.1":
   version "0.2.1"
@@ -1461,7 +1461,7 @@
     "@firebase/logger" "0.4.0"
     "@firebase/util" "1.9.3"
     tslib "^2.1.0"
-    undici "5.26.5"
+    undici "5.28.3"
 
 "@firebase/component@0.6.4":
   version "0.6.4"
@@ -1532,7 +1532,7 @@
     "@grpc/grpc-js" "~1.9.0"
     "@grpc/proto-loader" "^0.7.8"
     tslib "^2.1.0"
-    undici "5.26.5"
+    undici "5.28.3"
 
 "@firebase/functions-compat@0.3.6":
   version "0.3.6"
@@ -1561,7 +1561,7 @@
     "@firebase/messaging-interop-types" "0.2.0"
     "@firebase/util" "1.9.3"
     tslib "^2.1.0"
-    undici "5.26.5"
+    undici "5.28.3"
 
 "@firebase/installations-compat@0.2.4":
   version "0.2.4"
@@ -1703,7 +1703,7 @@
     "@firebase/component" "0.6.4"
     "@firebase/util" "1.9.3"
     tslib "^2.1.0"
-    undici "5.26.5"
+    undici "5.28.3"
 
 "@firebase/util@1.9.3", "@firebase/util@1.x":
   version "1.9.3"
@@ -2609,7 +2609,7 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-20.11.5.tgz"
   integrity sha512-g557vgQjUUfN76MZAN/dt1z3dzcUsimuysco0KeluHgrPdJXkP/XdAURgyO2W9fZWHRtRBiVKzKn8vyOAwlG+w==
   dependencies:
-    undici-types "~5.26.4"
+    undici-types "~5.28.3"
 
 "@types/parse-json@^4.0.0":
   version "4.0.2"
@@ -10076,14 +10076,14 @@ underscore@1.12.1:
   resolved "https://registry.npmjs.org/underscore/-/underscore-1.12.1.tgz"
   integrity sha512-hEQt0+ZLDVUMhebKxL4x1BTtDY7bavVofhZ9KZ4aI26X9SRaE+Y3m83XUL1UP2jn8ynjndwCCpEHdUG+9pP1Tw==
 
-undici-types@~5.26.4:
-  version "5.26.5"
-  resolved "https://registry.npmjs.org/undici-types/-/undici-types-5.26.5.tgz"
+undici-types@~5.28.3:
+  version "5.28.3"
+  resolved "https://registry.npmjs.org/undici-types/-/undici-types-5.28.3.tgz"
   integrity sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==
 
-undici@5.26.5:
-  version "5.26.5"
-  resolved "https://registry.npmjs.org/undici/-/undici-5.26.5.tgz"
+undici@5.28.3:
+  version "5.28.3"
+  resolved "https://registry.npmjs.org/undici/-/undici-5.28.3.tgz"
   integrity sha512-cSb4bPFd5qgR7qr2jYAi0hlX9n5YKK2ONKkLFkxl+v/9BvC0sOpZjBHDBSXc5lWAf5ty9oZdRXytBIHzgUcerw==
   dependencies:
     "@fastify/busboy" "^2.0.0"
